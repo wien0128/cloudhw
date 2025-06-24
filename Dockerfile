@@ -1,5 +1,5 @@
 # OpneJDK 17 사용
-FROM openjdk:17
+FROM openjdk:21
 
 # 이미지 메타데이터 정의 (유지관리자, 설명, 버전)
 LABEL maintainer="wien0128" \
