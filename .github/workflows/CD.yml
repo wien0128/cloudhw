@@ -5,7 +5,7 @@ on:
     workflows: [ "CloudHw CI" ]
     types:
       - completed
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: read
