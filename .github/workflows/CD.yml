@@ -1,8 +1,8 @@
-name: Halpme CD
+name: CloudHw CD
 
 on:
   workflow_run:
-    workflows: [ "Halpme CI" ]
+    workflows: [ "CloudHw CI" ]
     types:
       - completed
     branches: [ "main" ]
@@ -19,19 +19,19 @@ jobs:
     steps:
       # 1. latest 버전의 이미지 Pulling
       - name: Pull Latest Docker Image
-        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/halpme_cicd_action:latest
+        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/cloudhw_cicd_action:latest
 
       # 2. 기존 컨테이너 중지 후 삭제
       - name: Stop and Remove Old Container
         run: |
-          if [ "$(docker ps -aq -f name=halpme)" ]; then
-            sudo docker rm -f halpme || true
+          if [ "$(docker ps -aq -f name=cloudhw)" ]; then
+            sudo docker rm -f cloudhw || true
           fi
 
       # 3. 새 컨테이너 실행
       - name: Run New Container
         run: |
-          sudo docker run --name halpme --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/halpme_cicd_action:latest
+          sudo docker run --name cloudhw --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/cloudhw_cicd_action:latest
 
       # 4. 미사용 이미지 정리
       - name: Prune Unused Docker Images
